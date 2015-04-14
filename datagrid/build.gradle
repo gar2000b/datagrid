@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.onlineinteract'
+version = '1.0-SNAPSHOT'
+
+description = """datagrid"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+
+repositories {
+        
+     maven { url "http://maven.repository.redhat.com/earlyaccess/all/" }
+     maven { url "http://maven.repository.redhat.com/techpreview/all" }
+     maven { url "http://maven.repository.redhat.com/techpreview/all/" }
+     maven { url "file:///GaryBlack/programs/jboss-datagrid-6.4.0-server/projects/maven-repositories/jboss-datagrid-6.4.0-maven-repository" }
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'org.infinispan', name: 'infinispan-embedded', version:'6.2.0.Final-redhat-4'
+    compile group: 'junit', name: 'junit', version:'4.1'
+}

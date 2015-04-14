@@ -15,6 +15,7 @@
 			<groupId>org.infinispan</groupId>
 			<artifactId>infinispan-embedded</artifactId>
 			<version>6.2.0.Final-redhat-4</version>
+
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -28,6 +29,17 @@
 		<finalName>datagrid</finalName>
 
 		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>false</downloadJavadocs>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -46,35 +58,43 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<!-- <addDefaultImplementationEntries>true</addDefaultImplementationEntries> -->
+							<addClasspath>true</addClasspath>
+							<mainClass>com.onlineinteract.app.JBossDataGridDemo</mainClass>
+							<classpathPrefix>dependency-jars/</classpathPrefix>
 						</manifest>
 					</archive>
 				</configuration>
 			</plugin>
 
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>build-helper-maven-plugin</artifactId>
-				<version>1.7</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.5.1</version>
 				<executions>
 					<execution>
-						<id>add-source</id>
-						<phase>generate-sources</phase>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
 						<goals>
-							<goal>add-source</goal>
+							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<sources>
-								<source>src/main/java</source>
-							</sources>
+							<!-- exclude junit, we need runtime dependency only -->
+							<includeScope>runtime</includeScope>
+							<outputDirectory>${project.build.directory}/dependency-jars/</outputDirectory>
 						</configuration>
 					</execution>
-					<!-- <execution> <id>add-resource</id> <phase>generate-resources</phase> 
-						<goals> <goal>add-resource</goal> </goals> <configuration> <resources> <resource> 
-						<directory>client/src/main/resources</directory> <targetPath>resources</targetPath> 
-						</resource> </resources> </configuration> </execution> -->
 				</executions>
 			</plugin>
+
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>build-helper-maven-plugin</artifactId> 
+				<version>1.7</version> <executions> <execution> <id>add-source</id> <phase>generate-sources</phase> 
+				<goals> <goal>add-source</goal> </goals> <configuration> <sources> <source>src/main/java</source> 
+				</sources> </configuration> </execution> <execution> <id>add-resource</id> 
+				<phase>generate-resources</phase> <goals> <goal>add-resource</goal> </goals> 
+				<configuration> <resources> <resource> <directory>client/src/main/resources</directory> 
+				<targetPath>resources</targetPath> </resource> </resources> </configuration> 
+				</execution> </executions> </plugin> -->
 
 		</plugins>
 	</build>

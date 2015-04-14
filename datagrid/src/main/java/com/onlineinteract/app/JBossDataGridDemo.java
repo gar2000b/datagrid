@@ -7,11 +7,11 @@ import java.util.concurrent.TimeUnit;
 import org.infinispan.Cache;
 import org.infinispan.manager.DefaultCacheManager;
 
-public class Quickstart {
+public class JBossDataGridDemo {
 
 	private Cache<Object, Object> cache;
 
-	public Quickstart() {
+	public JBossDataGridDemo() {
 		cache = new DefaultCacheManager().getCache();
 	}
 
@@ -41,7 +41,7 @@ public class Quickstart {
 
 	public static void main(String[] args) throws InterruptedException {
 		System.out.println("**Starting cache**");
-		Quickstart quickstart = new Quickstart();
+		JBossDataGridDemo quickstart = new JBossDataGridDemo();
 		quickstart.demoInsertAndRemoveFromCache();
 		quickstart.demoAdjustDataLifeSpan();
 		System.out.println("**Finish cache**");
